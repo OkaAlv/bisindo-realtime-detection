@@ -37,6 +37,7 @@ Mac/Linux:
 Bash
 python3 -m venv env
 source env/bin/activate
+
 3. Install Dependensi Library
 Pastikan virtual environment sudah aktif (ada tulisan (env) di terminal), lalu install semua paket yang dibutuhkan:
 

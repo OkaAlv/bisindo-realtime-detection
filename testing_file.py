@@ -11,7 +11,7 @@ path_model = 'model_bisindo_statis.h5'
 # MASUKKAN PATH FILE GAMBAR ATAU VIDEO ANDA DI SINI:
 # Contoh Gambar: 'dataset_statis_224/A/A_01_0000.jpg'
 # Contoh Video: 'video_test_A.mp4'
-path_file_test = 'Testing/K/01.mp4' 
+path_file_test = 'Testing/B/01.mp4' 
 
 
 # --- 2. PERSIAPAN SISTEM ---

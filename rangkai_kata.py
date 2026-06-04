@@ -6,7 +6,7 @@ from tensorflow.keras.models import load_model
 import os
 
 print("Memuat model CNN...")
-model = load_model('model_bisindo_statis.h5')
+model = load_model('model_bisindo_statis_combined.h5')
 
 dataset_dir = 'dataset_statis_224'
 try:

@@ -7,7 +7,7 @@ import os
 
 # --- 1. PERSIAPAN MODEL & KELAS ---
 print("Memuat model CNN...")
-model = load_model('model_bisindo_statis.h5')
+model = load_model('model_bisindo_statis_combined.h5')
 
 # Mengambil daftar huruf otomatis dari nama folder agar urutannya persis seperti saat training
 dataset_dir = 'dataset_statis_224'

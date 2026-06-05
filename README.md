@@ -1,72 +1,83 @@
-# 🤟 Sistem Deteksi Real-time BISINDO (Bahasa Isyarat Indonesia)
+# 🤟 SignVoice ID: Sistem Penerjemah Real-time BISINDO Berbasis Suara
 
-Proyek *Computer Vision* ini dibangun menggunakan arsitektur *Pipeline 2-Tahap*: **MediaPipe** untuk ekstraksi *landmark* tangan (lokalisasi) dan **Convolutional Neural Network (CNN)** dengan TensorFlow/Keras untuk klasifikasi bentuk tangan secara *real-time*.
+Proyek *Computer Vision* ini dibangun menggunakan arsitektur *Pipeline 2-Tahap*: **MediaPipe** untuk ekstraksi *landmark* tangan (lokalisasi) dan **Convolutional Neural Network (CNN)** dengan TensorFlow/Keras untuk klasifikasi bentuk tangan secara *real-time*. 
 
-## Pengembang
-* OkaAlv
+Sistem ini dirancang sebagai **Aplikasi Penerjemah Interaktif** yang dilengkapi dengan fitur *Text-to-Speech* (TTS) dan logika pewaktuan (timer) untuk memfasilitasi komunikasi dua arah bagi teman-teman disabilitas rungu wicara.
 
-
----
+## 👤 Pengembang
+* **OkaAlv** ---
+* **Afifah Naila** ---
+* **Thania Dealva** ---
+* **Ali Affrahman** ---
+* **Ayman Human Sukma** ---
 
 ## ⚙️ Persyaratan Sistem
-Pastikan laptop Anda sudah ter-install:
+Pastikan perangkat Anda sudah ter-install:
 * Python 3.9 atau lebih baru (Disarankan 3.10)
 * Git
+* Webcam yang berfungsi dengan baik
 
 ---
 
-## 🚀 Panduan Instalasi dan Penggunaan
+## 🚀 Panduan Instalasi dan Penggunaan (Cara Mencoba)
 
-Ikuti langkah-langkah di bawah ini secara berurutan untuk menjalankan proyek ini di laptop Anda.
+Sistem ini sudah dilengkapi dengan model AI (Pre-trained) sehingga Anda **tidak perlu** melakukan *training* ulang. Ikuti langkah-langkah di bawah ini untuk langsung mencobanya:
 
 ### 1. Clone Repositori
-Buka terminal/Command Prompt, arahkan ke folder tempat Anda ingin menyimpan proyek ini, lalu jalankan:
+Buka terminal/Command Prompt, lalu jalankan:
 ```bash
 git clone [https://github.com/OkaAlv/bisindo-realtime-detection.git](https://github.com/OkaAlv/bisindo-realtime-detection.git)
 cd bisindo-realtime-detection
 
-2. Buat dan Aktifkan Virtual Environment (Sangat Disarankan)
-Untuk menghindari konflik antar library (Dependency Hell), buat lingkungan virtual khusus:
-Windows:
+2. Buat dan Aktifkan Virtual Environment (Disarankan)
+Untuk menghindari konflik library, buat lingkungan virtual khusus:
+
+Windows (PowerShell):
 
 Bash
 python -m venv env
+Set-ExecutionPolicy Unrestricted -Scope Process  # (Jalankan ini jika terjadi error permission)
 .\env\Scripts\activate
 Mac/Linux:
 
 Bash
 python3 -m venv env
 source env/bin/activate
-
 3. Install Dependensi Library
-Pastikan virtual environment sudah aktif (ada tulisan (env) di terminal), lalu install semua paket yang dibutuhkan:
+Pastikan virtual environment sudah aktif (terdapat tulisan (env) di terminal), lalu install semua paket yang dibutuhkan:
 
 Bash
 pip install -r requirements.txt
-4. Latih Model CNN (WAJIB!)
-PENTING: File model_bisindo_statis.h5 tidak disertakan di repositori ini karena melebihi batas ukuran GitHub (100MB). Anda harus melatih modelnya sendiri agar laptop Anda menghasilkan file .h5 tersebut.
+4. Unduh Model CNN (Pre-Trained Model)
+File model AI (model_bisindo_statis_combined.h5) tidak disertakan di dalam folder utama karena ukurannya yang besar.
+👉 Silakan unduh modelnya melalui tab Releases di GitHub ini.
+Setelah diunduh, letakkan file .h5 tersebut persis di dalam folder utama proyek ini.
+
+5. Jalankan Aplikasi!
+Setelah model tersedia, nyalakan kamera dan jalankan sistem penerjemah utamanya dengan perintah:
 
 Bash
-python train_cnn.py
-Tunggu hingga proses Epoch 1/10 sampai 10/10 selesai dan terminal menampilkan pesan bahwa model berhasil disimpan.
+python realtime_tts.py
+💡 Cara Penggunaan Aplikasi:
 
-5. Jalankan Deteksi Real-time
-Setelah file model_bisindo_statis.h5 berhasil terbuat, Anda bisa langsung menyalakan kamera dan menguji deteksinya:
+Mengetik Huruf: Bentuk tangan Anda sesuai abjad BISINDO (A-Z) di depan kamera. Tahan posisi tangan selama 1,5 detik agar sistem mengunci dan mencetak huruf tersebut ke layar.
 
-Bash
-python deteksi_realtime.py
-Cara Penggunaan: Bentuk tangan sesuai abjad BISINDO di depan kamera. Tahan posisi tangan selama sekitar setengah detik agar sistem merangkainya menjadi sebuah kata di bagian bawah layar.
-Tekan tombol C pada keyboard untuk menghapus teks, dan Q untuk mematikan kamera.
+Membaca Kata (Suara): Setelah merangkai satu kata, turunkan tangan Anda dari sorotan kamera selama 2,5 detik. Sistem otomatis membacakan kata tersebut menggunakan suara (Text-to-Speech) dan mengosongkan layar untuk kalimat berikutnya.
 
-📂 Penjelasan File Lainnya
-Selain program utama, repositori ini juga dilengkapi dengan script untuk keperluan testing dan laporan (visualisasi):
+Tekan 'q' pada keyboard untuk mematikan sistem.
 
-testing_file.py : Digunakan untuk menguji akurasi model menggunakan file gambar (.jpg/.png) atau video rekaman (.mp4) tanpa perlu menyalakan kamera real-time.
+📂 Penjelasan File Tambahan
+Selain program utama, repositori ini juga menyediakan script tambahan bagi yang ingin mempelajari sistem di belakang layar:
 
-generate_laporan.py : Menghasilkan visualisasi input RGB dan Feature Maps (lapisan Conv2D pertama) untuk melihat cara kerja filter CNN.
+train_cnn.py: Script untuk melatih ulang arsitektur CNN jika Anda ingin menambahkan dataset baru.
 
-visualisasi_modul_lengkap.py : Menghasilkan visualisasi lengkap dari tahap augmentasi, normalisasi, hingga Max Pooling.
+evaluasi_model.py & evaluasi_validasi.py: Script untuk mencetak Confusion Matrix dan metrik evaluasi model.
 
-visualisasi_semua_tahapan.py : Script Sapu Jagat yang membedah layer demi layer dari model .h5 dan menyimpannya ke dalam folder laporan_tahapan_cnn (Sangat cocok untuk presentasi/sidang).
+testing_file.py: Untuk menguji akurasi model menggunakan file gambar statis atau video tanpa perlu menyalakan webcam.
 
-Proyek ini dikembangkan untuk memenuhi tugas mata kuliah Computer Vision tingkat S1 (Semester 6).
+generate_laporan.py: Menghasilkan visualisasi Feature Maps untuk membedah cara kerja filter CNN dalam mengenali pola tangan.
+
+Proyek ini dikembangkan secara mandiri sebagai bentuk penerapan teknologi Computer Vision untuk menjembatani aksesibilitas komunikasi bahasa isyarat di Indonesia.
+
+
+***
